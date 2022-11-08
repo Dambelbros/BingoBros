@@ -7,10 +7,9 @@ import javax.swing.border.EmptyBorder;
 public class Ventana extends JFrame {
 
 	private JPanel contentPane;
+	private static int[] numeros = new int[90];
+	private static int pos = 0;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -22,11 +21,16 @@ public class Ventana extends JFrame {
 				}
 			}
 		});
+		
+		for (int i = 0; i < 7; i++) {
+			generarNumero();
+		}
+		
+		for (int j = 0; j < 10; j++) {
+			System.out.println(numeros[j]);
+		}
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public Ventana() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -35,5 +39,23 @@ public class Ventana extends JFrame {
 
 		setContentPane(contentPane);
 	}
+	
+	private static void generarNumero() {
+		boolean igual = false;
+		do {
+			igual = false;
+			int num = (int)(Math.random()*90+1);
+			for (int i = 0; i < pos; i++) {
+				if(numeros[i] == num) {
+					igual = true;
+					System.out.println("------------------");
+				}
+			}
 
+			if(!igual) {
+				numeros[pos] = num;
+				pos++;
+			}
+		} while (igual);
+	}
 }

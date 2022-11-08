@@ -25,7 +25,7 @@ public class Carton extends JFrame {
 		
 		for (int j = 0; j < FIL; j++) {
 			for (int i = 0; i < COL; i++) {
-				numeros[i][j] = 1;
+				numeros[i][j] = 120;
 			}
 		}
 		
@@ -64,25 +64,21 @@ public class Carton extends JFrame {
 			}
 			
 			for (int i = 0; i < vacio.length; i++) {
-				System.out.print(vacio[i] + " ");
 				carton[vacio[i]][fila] = 0;
 			}
-			System.out.println();
-			
-			System.out.println("Siguiente");
 		}
 	}
 	
 	private static void generarNumerosColumnas() {
-		int num, min, max, sum;
+		int min, max, sum;
 		for (int i = 0; i < COL; i++) {
-			System.out.println("Max: " + (i * 10 + 10));
-			System.out.println("Min: " + (i * 10));
 			min = i * 10;
 			for (int j = 0; j < FIL; j++) {
 				if(numeros[i][j] != 0) {
-					sum = (int)(Math.random()*10+1);
-					System.out.println(min + sum);
+					sum = (int)(Math.random()*10+1) + min;
+					if (numeros[i][0] != sum && numeros[i][1] != sum && numeros[i][2] != sum) {
+						numeros[i][j] = sum;
+					}
 				}
 			}
 		}
@@ -91,7 +87,11 @@ public class Carton extends JFrame {
 	private static void mostrar() {
 		for (int j = 0; j < FIL; j++) {
 			for (int i = 0; i < COL; i++) {
-				System.out.print(numeros[i][j] + " ");
+				if(numeros[i][j] > 9) {
+					System.out.print(numeros[i][j] + " ");
+				} else {
+					System.out.print(" " + numeros[i][j] + " ");
+				}
 			}
 			System.out.println();
 		}
