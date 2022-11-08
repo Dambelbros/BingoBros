@@ -3,6 +3,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import java.awt.BorderLayout;
 
 public class Ventana extends JFrame {
 
@@ -38,6 +39,7 @@ public class Ventana extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
+		contentPane.setLayout(new BorderLayout(0, 0));
 	}
 	
 	private static void generarNumero() {
