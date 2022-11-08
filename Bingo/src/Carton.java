@@ -55,47 +55,47 @@ public class Carton extends JFrame {
 		layeredPane.add(panel);
 		panel.setLayout(new GridLayout(3, 9, 0, 0));
 		
-		JButton btnNewButton_1 = new JButton("New button");
-		panel.add(btnNewButton_1);
+		JButton btnV1H1 = new JButton("New button");
+		panel.add(btnV1H1);
 		
-		JButton btnNewButton_1_1 = new JButton("New button");
-		panel.add(btnNewButton_1_1);
+		JButton btnV1H2 = new JButton("New button");
+		panel.add(btnV1H2);
 		
-		JButton btnNewButton_1_2 = new JButton("New button");
-		panel.add(btnNewButton_1_2);
+		JButton btnV1H3 = new JButton("New button");
+		panel.add(btnV1H3);
 		
-		JButton btnNewButton_3 = new JButton("New button");
-		panel.add(btnNewButton_3);
+		JButton btnV1H4 = new JButton("New button");
+		panel.add(btnV1H4);
 		
-		JButton btnNewButton_2 = new JButton("New button");
-		panel.add(btnNewButton_2);
+		JButton btnV1H5 = new JButton("New button");
+		panel.add(btnV1H5);
 		
-		JButton btnNewButton_4 = new JButton("New button");
-		panel.add(btnNewButton_4);
+		JButton btnV1H6 = new JButton("New button");
+		panel.add(btnV1H6);
 		
-		JButton btnNewButton_1_3 = new JButton("New button");
-		panel.add(btnNewButton_1_3);
+		JButton btnV1H7 = new JButton("New button");
+		panel.add(btnV1H7);
 		
-		JButton btnNewButton_1_1_1 = new JButton("New button");
-		panel.add(btnNewButton_1_1_1);
+		JButton btnV1H8 = new JButton("New button");
+		panel.add(btnV1H8);
 		
-		JButton btnNewButton_1_2_1 = new JButton("New button");
-		panel.add(btnNewButton_1_2_1);
+		JButton btnV1H9 = new JButton("New button");
+		panel.add(btnV1H9);
 		
-		JButton btnNewButton_3_1 = new JButton("New button");
-		panel.add(btnNewButton_3_1);
+		JButton btnV2H1 = new JButton("New button");
+		panel.add(btnV2H1);
 		
-		JButton btnNewButton_2_1 = new JButton("New button");
-		panel.add(btnNewButton_2_1);
+		JButton btnV2H2 = new JButton("New button");
+		panel.add(btnV2H2);
 		
-		JButton btnNewButton_4_1 = new JButton("New button");
-		panel.add(btnNewButton_4_1);
+		JButton btnV2H3 = new JButton("New button");
+		panel.add(btnV2H3);
 		
-		JButton btnNewButton_10 = new JButton("New button");
-		panel.add(btnNewButton_10);
+		JButton btnV2H4 = new JButton("New button");
+		panel.add(btnV2H4);
 		
-		JButton btnNewButton_5_1 = new JButton("New button");
-		panel.add(btnNewButton_5_1);
+		JButton btnV2H5 = new JButton("New button");
+		panel.add(btnV2H5);
 		
 		JButton btnNewButton_7_1 = new JButton("New button");
 		panel.add(btnNewButton_7_1);
