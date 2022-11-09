@@ -15,17 +15,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.awt.event.ActionEvent;
-import java.awt.FlowLayout;
-import java.awt.CardLayout;
-import javax.swing.BoxLayout;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import net.miginfocom.swing.MigLayout;
-import com.jgoodies.forms.layout.FormSpecs;
-import javax.swing.SpringLayout;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 
@@ -313,7 +303,7 @@ public class Carton extends JFrame {
 		});
 	}
 
-	public static boolean esNumero(String str) { 
+	private static boolean esNumero(String str) { 
 		try {  
 			Double.parseDouble(str);  
 			return true;
@@ -337,7 +327,7 @@ public class Carton extends JFrame {
 				try {
 					Scanner fichero = new Scanner (new File("fichero"));
 					String numero;
-					int numUno, numDos, comprobados = 0;
+					int numUno, comprobados = 0;
 					ArrayList<String> correctos = new ArrayList<String>();
 					while (fichero.hasNext()) {
 						numero = (String) fichero.next();
