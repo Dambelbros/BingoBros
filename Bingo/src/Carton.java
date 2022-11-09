@@ -12,6 +12,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.awt.event.ActionEvent;
@@ -325,40 +327,66 @@ public class Carton extends JFrame {
 
 			if (correcto) {
 				try {
-					Scanner fichero = new Scanner (new File("fichero"));
-					String numero;
-					int numUno, comprobados = 0;
-					ArrayList<String> correctos = new ArrayList<String>();
-					while (fichero.hasNext()) {
-						numero = (String) fichero.next();
-						correctos.add(numero);
-					}
-					
-					for (int j = 0; j < COL; j++) {
-						if(carton[j][i].getBackground().equals(Color.GREEN)) {
-							numUno = aNumeroJ(carton[j][i]);
-							for (int c = 0; c < correctos.size(); c++) {
-								if(Integer.parseInt(correctos.get(c)) == numUno) {
-									comprobados++;
-									break;
-								};
+					Scanner ganado = new Scanner (new File("ganadoLinea"));
+					ganado.close();
+					JOptionPane.showMessageDialog(null, "Ya se ha cantado linea");
+				} catch (FileNotFoundException e1) {
+					try {
+						Scanner fichero = new Scanner (new File("fichero"));
+						String numero;
+						int numUno, comprobados = 0;
+						ArrayList<String> correctos = new ArrayList<String>();
+						while (fichero.hasNext()) {
+							numero = (String) fichero.next();
+							correctos.add(numero);
+						}
+
+						for (int j = 0; j < COL; j++) {
+							if(carton[j][i].getBackground().equals(Color.GREEN)) {
+								numUno = aNumeroJ(carton[j][i]);
+								for (int c = 0; c < correctos.size(); c++) {
+									if(Integer.parseInt(correctos.get(c)) == numUno) {
+										comprobados++;
+										break;
+									};
+								}
 							}
 						}
+
+						if (comprobados == 5) {
+							JOptionPane.showMessageDialog(null, "Has cantado linea correctamente");
+							PrintWriter ganado = new PrintWriter(new File("ganadoLinea"));
+							ganado.close();
+						} else {
+							JOptionPane.showMessageDialog(null, "Has cantado linea incorrectamente");
+						}
+
+						for (int j = 0; j < 3; j++) {
+
+						}
+					} catch (Exception e) {
+
 					}
-					
-					if (comprobados == 5) {
-						JOptionPane.showMessageDialog(null, "Has cantado linea correctamente");
-					} else {
-						JOptionPane.showMessageDialog(null, "Has cantado linea incorrectamente");
-					}
-					
-					for (int j = 0; j < 3; j++) {
-						
-					}
-				} catch (Exception e) {
-					
 				}
 			}
 		}
 	}
+	
+	/*
+	public static void comprobarBingo() {
+		boolean correcto = true;
+		try {
+			Scanner fichero = new Scanner (new File("fichero"));
+			String numero;
+			ArrayList<String> correctos = new ArrayList<String>();
+			while (fichero.hasNext()) {
+				numero = (String) fichero.next();
+				correctos.add(numero);
+			}
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	*/
 }

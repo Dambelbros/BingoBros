@@ -49,6 +49,13 @@ public class Ventana extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
+		try {
+			File eliminar_ganado = new File("ganadoLinea");
+			eliminar_ganado.delete();
+		} catch (Exception e) {
+			
+		}
+		
 		JLayeredPane layeredPane = new JLayeredPane();
 		contentPane.add(layeredPane, BorderLayout.CENTER);
 		layeredPane.setLayout(new BorderLayout(0, 0));
@@ -70,10 +77,6 @@ public class Ventana extends JFrame {
 				if (cantNumeros < 90) {
 					generarNumeroJ();
 					cantNumeros++;
-					for (int i = 0; i <= pos; i++) {
-						System.out.print(numeros[i] + " ");
-					}
-					System.out.println();
 				}
 			}
 		});
@@ -103,7 +106,7 @@ public class Ventana extends JFrame {
 				if (num > 9) {
 					lblNumeroGrande.setText(String.valueOf(num));
 				} else {
-					lblNumeroGrande.setText(" " + String.valueOf(num));
+					lblNumeroGrande.setText("_" + String.valueOf(num));
 				}
 				try {
 					PrintWriter fichero = new PrintWriter(new File("fichero"));
