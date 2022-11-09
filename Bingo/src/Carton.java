@@ -6,10 +6,13 @@ import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
@@ -320,7 +323,7 @@ public class Carton extends JFrame {
 	}
 
 	public static void comprobarLinea() {
-		boolean correcto;		
+		boolean correcto;
 		for (int i = 0; i < FIL; i++) {
 			correcto = true;
 			for (int j = 0; j < COL; j++) {
@@ -333,12 +336,37 @@ public class Carton extends JFrame {
 			if (correcto) {
 				try {
 					Scanner fichero = new Scanner (new File("fichero"));
+					String numero;
+					int numUno, numDos, comprobados = 0;
+					ArrayList<String> correctos = new ArrayList<String>();
 					while (fichero.hasNext()) {
-						System.out.println((String) fichero.next());
-
+						numero = (String) fichero.next();
+						correctos.add(numero);
+					}
+					
+					for (int j = 0; j < COL; j++) {
+						if(carton[j][i].getBackground().equals(Color.GREEN)) {
+							numUno = aNumeroJ(carton[j][i]);
+							for (int c = 0; c < correctos.size(); c++) {
+								if(Integer.parseInt(correctos.get(c)) == numUno) {
+									comprobados++;
+									break;
+								};
+							}
+						}
+					}
+					
+					if (comprobados == 5) {
+						JOptionPane.showMessageDialog(null, "Has cantado linea correctamente");
+					} else {
+						JOptionPane.showMessageDialog(null, "Has cantado linea incorrectamente");
+					}
+					
+					for (int j = 0; j < 3; j++) {
+						
 					}
 				} catch (Exception e) {
-
+					
 				}
 			}
 		}
