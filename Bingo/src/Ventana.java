@@ -15,6 +15,7 @@ import java.io.PrintWriter;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Toolkit;
 
 @SuppressWarnings("serial")
 public class Ventana extends JFrame {
@@ -41,6 +42,7 @@ public class Ventana extends JFrame {
 	}
 
 	public Ventana() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Dam1\\Downloads\\bingo ventana.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 639, 489);
 		contentPane = new JPanel();
@@ -49,13 +51,26 @@ public class Ventana extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
+		/*Elimina los archivos creados*/
 		try {
-			File eliminar_ganado = new File("ganadoLinea");
-			eliminar_ganado.delete();
+			File eliminar_linea = new File("ganadoLinea");
+			eliminar_linea.delete();
 		} catch (Exception e) {
-			
 		}
 		
+		try {
+			File eliminar_bingo = new File("ganadoBingo");
+			eliminar_bingo.delete();
+		} catch (Exception e) {
+		}
+		
+		try {
+			File eliminar_numeros = new File("fichero");
+			eliminar_numeros.delete();
+		} catch (Exception e) {
+		}
+		
+		/*Panel principal*/
 		JLayeredPane layeredPane = new JLayeredPane();
 		contentPane.add(layeredPane, BorderLayout.CENTER);
 		layeredPane.setLayout(new BorderLayout(0, 0));
@@ -71,6 +86,7 @@ public class Ventana extends JFrame {
 		JPanel panelOpciones = new JPanel();
 		layeredPane.add(panelOpciones, BorderLayout.SOUTH);
 		
+		/*Boton generar bolas*/
 		JButton btnGenerarNumero = new JButton("Sacar Bola");
 		btnGenerarNumero.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -82,12 +98,24 @@ public class Ventana extends JFrame {
 		});
 		panelOpciones.add(btnGenerarNumero);
 		
+		/*Boton reiniciar*/
+		JButton btnReinicio = new JButton("Reiniciar");
+		btnReinicio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				partidaNueva();
+			}
+		});
+		panelOpciones.add(btnReinicio);
+		
 		JPanel panelNumeros = new JPanel();
 		layeredPane.add(panelNumeros, BorderLayout.CENTER);
 		panelNumeros.setLayout(new GridLayout(9, 10, 0, 0));
 		
+		/*Generador de botones numero*/
 		for (int i = 0; i < 90; i++) {
 			JButton btn = new JButton(String.valueOf((i + 1)));
+			btn.setEnabled(false);
+			btn.setBackground(Color.WHITE);
 			panelNumeros.add(btn);
 			labels[i] = btn;
 		}
@@ -121,5 +149,37 @@ public class Ventana extends JFrame {
 			}
 
 		} while (igual);
+	}
+	
+	private static void partidaNueva() {
+		for (int i = 0; i < labels.length; i++) {
+			labels[i].setBackground(Color.WHITE);
+		}
+		
+		for (int i = 0; i < numeros.length; i++) {
+			numeros[i] = 0;
+		}
+		lblNumeroGrande.setText("XX");
+		
+		try {
+			File eliminar_linea = new File("ganadoLinea");
+			eliminar_linea.delete();
+		} catch (Exception e) {
+		}
+		
+		try {
+			File eliminar_bingo = new File("ganadoBingo");
+			eliminar_bingo.delete();
+		} catch (Exception e) {
+		}
+		
+		try {
+			File eliminar_numeros = new File("fichero");
+			eliminar_numeros.delete();
+		} catch (Exception e) {
+		}
+		
+		cantNumeros = 0;
+		pos = 0;
 	}
 }

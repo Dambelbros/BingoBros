@@ -20,6 +20,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Toolkit;
 
 @SuppressWarnings("serial")
 public class Carton extends JFrame {
@@ -50,6 +51,7 @@ public class Carton extends JFrame {
 	}
 
 	public Carton() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Dam1\\Downloads\\bola carton.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 567, 314);
 		setResizable(false);
@@ -372,21 +374,47 @@ public class Carton extends JFrame {
 		}
 	}
 	
-	/*
 	public static void comprobarBingo() {
-		boolean correcto = true;
+		boolean correcto = true, igual;
 		try {
 			Scanner fichero = new Scanner (new File("fichero"));
 			String numero;
-			ArrayList<String> correctos = new ArrayList<String>();
+			ArrayList<String> bingo = new ArrayList<String>();
 			while (fichero.hasNext()) {
 				numero = (String) fichero.next();
-				correctos.add(numero);
+				bingo.add(numero);
 			}
-
+			
+			for (int i = 0; i < FIL; i++) {
+				for (int j = 0; j < COL; j++) {
+					igual = false;
+					if(carton[j][i].getBackground().equals(Color.WHITE)) {
+						correcto = false;
+						break;
+					} else if(carton[j][i].getBackground().equals(Color.GREEN)) {
+						for (int numBingo = 0; numBingo < bingo.size(); numBingo++) {
+							if (Integer.parseInt(bingo.get(numBingo)) == aNumeroJ(carton[j][i])) {
+								igual = true;
+							}
+						}
+						
+						if(!igual) {
+							correcto = false;
+							break;
+						}
+					}
+				}
+			}
+			if(correcto) {
+				JOptionPane.showMessageDialog(null, "Has cantado bingo, has ganado");
+				PrintWriter ganado = new PrintWriter(new File("ganadoBingo"));
+				ganado.close();
+			} else {
+				JOptionPane.showMessageDialog(null, "Has cantado bingo incorrectamente");
+			}
+			
 		} catch (Exception e) {
-			// TODO: handle exception
+
 		}
 	}
-	*/
 }
