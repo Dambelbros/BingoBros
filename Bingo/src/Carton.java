@@ -27,10 +27,10 @@ public class Carton extends JFrame {
 	private final static int COL = 9;
 	private final static int FIL = 3;
 	private JPanel contentPane;
-	private static int[][] numeros = new int[COL][FIL];
 	private static JButton[][] carton = new JButton[COL][FIL];
 	private static JButton btnLinea, btnBingo;
 	public static String nombre;
+	private JButton btnNuevocarton;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -43,13 +43,6 @@ public class Carton extends JFrame {
 				}
 			}
 		});
-
-		/*Control de daños: Cambiar 120 por 0*/
-		for (int j = 0; j < FIL; j++) {
-			for (int i = 0; i < COL; i++) {
-				numeros[i][j] = 120;
-			}
-		}
 	}
 
 	public Carton() {
@@ -84,13 +77,23 @@ public class Carton extends JFrame {
 		JPanel panelBotones = new JPanel();
 		panelBotones.setBounds(0, 214, 541, 51);
 		layeredPane.add(panelBotones);
-		panelBotones.setLayout(new GridLayout(0, 2, 0, 0));
+		panelBotones.setLayout(null);
 
 		btnLinea = new JButton("LINEA");
+		btnLinea.setBounds(0, 0, 143, 40);
 		panelBotones.add(btnLinea);
 
 		btnBingo = new JButton("BINGO");
+		btnBingo.setBounds(199, 0, 143, 40);
 		panelBotones.add(btnBingo);
+		
+		btnNuevocarton = new JButton("NUEVO CARTÓN");
+		btnNuevocarton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNuevocarton.setBounds(398, 0, 143, 40);
+		panelBotones.add(btnNuevocarton);
 
 		JPanel panelArriba = new JPanel();
 		panelArriba.setBounds(0, 0, 531, 43);
@@ -351,4 +354,9 @@ public class Carton extends JFrame {
 			}
 		}
 	}
+	
+	public static void cartonNuevo() {
+		
+	}
+	
 }
