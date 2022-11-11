@@ -26,7 +26,8 @@ import java.awt.Toolkit;
 public class Carton extends JFrame {
 	private final static int COL = 9;
 	private final static int FIL = 3;
-	private JPanel contentPane;
+	private JPanel contentPane, panelCasillas, panelBotones, panelArriba;
+	private JLayeredPane layeredPane;
 	private static JButton[][] carton = new JButton[COL][FIL];
 	private static JButton btnLinea, btnBingo;
 	public static String nombre;
@@ -56,10 +57,10 @@ public class Carton extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 
-		JLayeredPane layeredPane = new JLayeredPane();
+		layeredPane = new JLayeredPane();
 		contentPane.add(layeredPane, BorderLayout.CENTER);
 
-		JPanel panelCasillas = new JPanel();
+		panelCasillas = new JPanel();
 		panelCasillas.setBounds(0, 43, 541, 160);
 		layeredPane.add(panelCasillas);
 		panelCasillas.setLayout(new GridLayout(3, 9, 0, 0));
@@ -74,7 +75,7 @@ public class Carton extends JFrame {
 			}
 		}
 
-		JPanel panelBotones = new JPanel();
+		panelBotones = new JPanel();
 		panelBotones.setBounds(0, 214, 541, 51);
 		layeredPane.add(panelBotones);
 		panelBotones.setLayout(null);
@@ -90,12 +91,13 @@ public class Carton extends JFrame {
 		btnNuevocarton = new JButton("NUEVO CARTÓN");
 		btnNuevocarton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				cartonNuevo();
 			}
 		});
 		btnNuevocarton.setBounds(398, 0, 143, 40);
 		panelBotones.add(btnNuevocarton);
 
-		JPanel panelArriba = new JPanel();
+		panelArriba = new JPanel();
 		panelArriba.setBounds(0, 0, 531, 43);
 		layeredPane.add(panelArriba);
 		panelArriba.setLayout(null);
@@ -356,7 +358,20 @@ public class Carton extends JFrame {
 	}
 	
 	public static void cartonNuevo() {
+		panelCasillas.removeAll();
+		panelCasillas.repaint();
 		
+		for (int i = 0; i < FIL; i++) {
+			for (int j = 0; j < COL; j++) {
+				JButton btnCasilla = new JButton("");
+				btnCasilla.setBackground(Color.WHITE);
+				panelCasillas.add(btnCasilla);
+				carton[j][i] = btnCasilla;
+			}
+		}
+		
+		generarEspaciosVaciosJ();
+		generarNumerosColumnasJ();
+		generarListener();
 	}
-	
 }
