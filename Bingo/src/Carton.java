@@ -262,6 +262,7 @@ public class Carton extends JFrame {
 
 			if (correcto) {
 				try {
+					System.out.println("dsg");
 					Scanner ganado = new Scanner (new File("ganadoLinea"));
 					ganado.close();
 					JOptionPane.showMessageDialog(null, "Ya se ha cantado linea");
