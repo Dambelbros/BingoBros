@@ -26,7 +26,7 @@ import java.awt.Toolkit;
 public class Carton extends JFrame {
 	private final static int COL = 9;
 	private final static int FIL = 3;
-	private JPanel contentPane, panelCasillas, panelBotones, panelArriba;
+	private static JPanel contentPane, panelCasillas, panelBotones, panelArriba;
 	private JLayeredPane layeredPane;
 	private static JButton[][] carton = new JButton[COL][FIL];
 	private static JButton btnLinea, btnBingo;
