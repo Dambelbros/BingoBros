@@ -33,6 +33,7 @@ public class Ventana extends JFrame {
 	private static JLabel lblNumeroGrande;
 	private static Timer reloj;
 	private static boolean cantaLinea = false, cantaBingo = false;
+	private static String ganadorLinea, ganadorBingo;
 	
 
 	public static void main(String[] args) {
@@ -49,7 +50,7 @@ public class Ventana extends JFrame {
 	}
 
 	public Ventana() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Dam1\\Downloads\\bingo ventana.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("bingoVentana.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 639, 489);
 		contentPane = new JPanel();
@@ -134,9 +135,12 @@ public class Ventana extends JFrame {
 				if (!cantaLinea) {
 					try {
 						Scanner archivoLinea = new Scanner (new File("ganadoLinea"));
+						while (archivoLinea.hasNext()) {
+							ganadorLinea = (String) archivoLinea.next();
+						}
 						archivoLinea.close();
 						cantaLinea = true;
-						JOptionPane.showMessageDialog(null, "Han cantado linea correctamente");
+						JOptionPane.showMessageDialog(null, (ganadorLinea + " a cantado linea correctamente"));
 					} catch (Exception e2) {
 					}
 				}
@@ -144,9 +148,12 @@ public class Ventana extends JFrame {
 				if (!cantaBingo) {
 					try {
 						Scanner archivoLinea = new Scanner (new File("ganadoBingo"));
+						while (archivoLinea.hasNext()) {
+							ganadorBingo = (String) archivoLinea.next();
+						}
 						archivoLinea.close();
 						cantaBingo = true;
-						JOptionPane.showMessageDialog(null, "Han cantado bingo correctamente");
+						JOptionPane.showMessageDialog(null, (ganadorBingo + " a cantado bingo correctamente"));
 					} catch (Exception e2) {
 					}
 				}

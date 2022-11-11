@@ -30,6 +30,7 @@ public class Carton extends JFrame {
 	private static int[][] numeros = new int[COL][FIL];
 	private static JButton[][] carton = new JButton[COL][FIL];
 	private static JButton btnLinea, btnBingo;
+	public static String nombre;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -52,7 +53,7 @@ public class Carton extends JFrame {
 	}
 
 	public Carton() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Dam1\\Downloads\\bola carton.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("bolaCarton.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 567, 314);
 		setResizable(false);
@@ -104,6 +105,10 @@ public class Carton extends JFrame {
 		generarEspaciosVaciosJ();
 		generarNumerosColumnasJ();
 		generarListener();
+		
+		do {
+			nombre = JOptionPane.showInputDialog("Nombre");
+		} while (nombre.equals(""));
 	}
 
 	private static void generarListener() {
@@ -255,6 +260,7 @@ public class Carton extends JFrame {
 					Scanner ganado = new Scanner (new File("ganadoLinea"));
 					ganado.close();
 					JOptionPane.showMessageDialog(null, "Ya se ha cantado linea");
+					i = 5;
 				} catch (FileNotFoundException e1) {
 					try {
 						Scanner fichero = new Scanner (new File("fichero"));
@@ -280,14 +286,12 @@ public class Carton extends JFrame {
 
 						if (comprobados == 5) {
 							PrintWriter ganado = new PrintWriter(new File("ganadoLinea"));
+							ganado.println(nombre);
 							ganado.close();
 							JOptionPane.showMessageDialog(null, "Has cantado linea correctamente");
+							i = 5;
 						} else {
 							JOptionPane.showMessageDialog(null, "Has cantado linea incorrectamente");
-						}
-
-						for (int j = 0; j < 3; j++) {
-
 						}
 					} catch (Exception e) {
 
@@ -335,6 +339,7 @@ public class Carton extends JFrame {
 				}
 				if(correcto) {
 					PrintWriter ganado = new PrintWriter(new File("ganadoBingo"));
+					ganado.println(nombre);
 					ganado.close();
 					JOptionPane.showMessageDialog(null, "Has cantado bingo, has ganado");
 				} else {
