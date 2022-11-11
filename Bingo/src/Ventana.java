@@ -176,7 +176,7 @@ public class Ventana extends JFrame {
 				if (num > 9) {
 					lblNumeroGrande.setText(String.valueOf(num));
 				} else {
-					lblNumeroGrande.setText("_" + String.valueOf(num));
+					lblNumeroGrande.setText("0" + String.valueOf(num));
 				}
 				try {
 					PrintWriter fichero = new PrintWriter(new File("fichero"));
