@@ -359,20 +359,15 @@ public class Carton extends JFrame {
 	}
 	
 	public static void cartonNuevo() {
-		panelCasillas.removeAll();
-		panelCasillas.repaint();
-		
 		for (int i = 0; i < FIL; i++) {
 			for (int j = 0; j < COL; j++) {
-				JButton btnCasilla = new JButton("");
-				btnCasilla.setBackground(Color.WHITE);
-				panelCasillas.add(btnCasilla);
-				carton[j][i] = btnCasilla;
+				carton[j][i].setText("");
+				carton[j][i].setBackground(Color.WHITE);
+				carton[j][i].setEnabled(true);
 			}
 		}
 		
 		generarEspaciosVaciosJ();
 		generarNumerosColumnasJ();
-		generarListener();
 	}
 }
