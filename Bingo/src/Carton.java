@@ -279,9 +279,9 @@ public class Carton extends JFrame {
 						}
 
 						if (comprobados == 5) {
-							JOptionPane.showMessageDialog(null, "Has cantado linea correctamente");
 							PrintWriter ganado = new PrintWriter(new File("ganadoLinea"));
 							ganado.close();
+							JOptionPane.showMessageDialog(null, "Has cantado linea correctamente");
 						} else {
 							JOptionPane.showMessageDialog(null, "Has cantado linea incorrectamente");
 						}
@@ -334,9 +334,9 @@ public class Carton extends JFrame {
 					}
 				}
 				if(correcto) {
-					JOptionPane.showMessageDialog(null, "Has cantado bingo, has ganado");
 					PrintWriter ganado = new PrintWriter(new File("ganadoBingo"));
 					ganado.close();
+					JOptionPane.showMessageDialog(null, "Has cantado bingo, has ganado");
 				} else {
 					JOptionPane.showMessageDialog(null, "Has cantado bingo incorrectamente");
 				}

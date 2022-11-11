@@ -1,21 +1,26 @@
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.FlowLayout;
 
 @SuppressWarnings("serial")
 public class Ventana extends JFrame {
@@ -26,6 +31,8 @@ public class Ventana extends JFrame {
 	private static int cantNumeros = 0, pos = 0;
 	private static int[] numeros = new int[90];
 	private static JLabel lblNumeroGrande;
+	private static Timer reloj;
+	private static boolean cantaLinea = false, cantaBingo = false;
 	
 
 	public static void main(String[] args) {
@@ -77,10 +84,10 @@ public class Ventana extends JFrame {
 		
 		JPanel panelNumeroGrande = new JPanel();
 		layeredPane.add(panelNumeroGrande, BorderLayout.EAST);
-		panelNumeroGrande.setLayout(new BorderLayout(0, 0));
+		panelNumeroGrande.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		lblNumeroGrande = new JLabel("XX");
-		lblNumeroGrande.setFont(new Font("Tahoma", Font.PLAIN, 50));
+		lblNumeroGrande.setFont(new Font("Tahoma", Font.PLAIN, 99));
 		panelNumeroGrande.add(lblNumeroGrande);
 		
 		JPanel panelOpciones = new JPanel();
@@ -110,7 +117,7 @@ public class Ventana extends JFrame {
 		JPanel panelNumeros = new JPanel();
 		layeredPane.add(panelNumeros, BorderLayout.CENTER);
 		panelNumeros.setLayout(new GridLayout(9, 10, 0, 0));
-		
+
 		/*Generador de botones numero*/
 		for (int i = 0; i < 90; i++) {
 			JButton btn = new JButton(String.valueOf((i + 1)));
@@ -119,6 +126,34 @@ public class Ventana extends JFrame {
 			panelNumeros.add(btn);
 			labels[i] = btn;
 		}
+
+		reloj = new Timer(500, new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (!cantaLinea) {
+					try {
+						Scanner archivoLinea = new Scanner (new File("ganadoLinea"));
+						archivoLinea.close();
+						cantaLinea = true;
+						JOptionPane.showMessageDialog(null, "Han cantado linea correctamente");
+					} catch (Exception e2) {
+					}
+				}
+
+				if (!cantaBingo) {
+					try {
+						Scanner archivoLinea = new Scanner (new File("ganadoBingo"));
+						archivoLinea.close();
+						cantaBingo = true;
+						JOptionPane.showMessageDialog(null, "Han cantado bingo correctamente");
+					} catch (Exception e2) {
+					}
+				}
+			}
+		});
+
+		reloj.start();
 	}
 	
 	private static void generarNumeroJ() {
