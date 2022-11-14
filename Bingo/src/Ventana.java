@@ -207,6 +207,7 @@ public class Ventana extends JFrame {
 		for (int i = 0; i < numeros.length; i++) {
 			numeros[i] = 0;
 		}
+		
 		lblNumeroGrande.setText("XX");
 		
 		try {
