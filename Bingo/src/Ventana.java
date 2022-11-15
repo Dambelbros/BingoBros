@@ -31,10 +31,10 @@ public class Ventana extends JFrame {
 	private static int cantNumeros = 0, pos = 0;
 	private static int[] numeros = new int[90];
 	private static JLabel lblNumeroGrande;
-	private static Timer reloj;
+	private static Timer reloj, automatico;
 	private static boolean cantaLinea = false, cantaBingo = false;
 	private static String ganadorLinea, ganadorBingo;
-	
+
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -58,42 +58,42 @@ public class Ventana extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
-		
+
 		/*Elimina los archivos creados*/
 		try {
 			File eliminar_linea = new File("ganadoLinea");
 			eliminar_linea.delete();
 		} catch (Exception e) {
 		}
-		
+
 		try {
 			File eliminar_bingo = new File("ganadoBingo");
 			eliminar_bingo.delete();
 		} catch (Exception e) {
 		}
-		
+
 		try {
 			File eliminar_numeros = new File("fichero");
 			eliminar_numeros.delete();
 		} catch (Exception e) {
 		}
-		
+
 		/*Panel principal*/
 		JLayeredPane layeredPane = new JLayeredPane();
 		contentPane.add(layeredPane, BorderLayout.CENTER);
 		layeredPane.setLayout(new BorderLayout(0, 0));
-		
+
 		JPanel panelNumeroGrande = new JPanel();
 		layeredPane.add(panelNumeroGrande, BorderLayout.EAST);
 		panelNumeroGrande.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
+
 		lblNumeroGrande = new JLabel("XX");
 		lblNumeroGrande.setFont(new Font("Tahoma", Font.PLAIN, 99));
 		panelNumeroGrande.add(lblNumeroGrande);
-		
+
 		JPanel panelOpciones = new JPanel();
 		layeredPane.add(panelOpciones, BorderLayout.SOUTH);
-		
+
 		/*Boton generar bolas*/
 		JButton btnGenerarNumero = new JButton("Sacar Bola");
 		btnGenerarNumero.addActionListener(new ActionListener() {
@@ -104,8 +104,34 @@ public class Ventana extends JFrame {
 				}
 			}
 		});
+
+		//Generamos un Timer para automatizar la salida de las bolas.
+		automatico=new Timer(50, new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (cantNumeros < 90) {
+					generarNumeroJ();
+					cantNumeros++;
+				} else {
+					automatico.stop();				}
+			}
+		});
+
+		//Creamos el boton y le indicamos que cuando le demos se inicie y si volvemos a pulsar se pare.
+		JButton btnAuto = new JButton("Modo automático");
+		btnAuto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(automatico.isRunning()) {
+					automatico.stop();
+				} else {
+					automatico.start();
+				}
+			}
+		});
+		panelOpciones.add(btnAuto);
 		panelOpciones.add(btnGenerarNumero);
-		
+
 		/*Boton reiniciar*/
 		JButton btnReinicio = new JButton("Reiniciar");
 		btnReinicio.addActionListener(new ActionListener() {
@@ -114,7 +140,7 @@ public class Ventana extends JFrame {
 			}
 		});
 		panelOpciones.add(btnReinicio);
-		
+
 		JPanel panelNumeros = new JPanel();
 		layeredPane.add(panelNumeros, BorderLayout.CENTER);
 		panelNumeros.setLayout(new GridLayout(9, 10, 0, 0));
@@ -162,7 +188,7 @@ public class Ventana extends JFrame {
 
 		reloj.start();
 	}
-	
+
 	private static void generarNumeroJ() {
 		boolean igual = false;
 		do {
@@ -185,43 +211,45 @@ public class Ventana extends JFrame {
 					}
 					fichero.close();
 				} catch (FileNotFoundException e) {
-					
+
 				}
-				
+
 			}
 
 		} while (igual);
 	}
-	
+
 	private static void partidaNueva() {
+		automatico.stop();
+
 		try {
 			File eliminar_numeros = new File("fichero");
 			eliminar_numeros.delete();
 		} catch (Exception e) {
 		}
-		
+
 		for (int i = 0; i < labels.length; i++) {
 			labels[i].setBackground(Color.WHITE);
 		}
-		
+
 		for (int i = 0; i < numeros.length; i++) {
 			numeros[i] = 0;
 		}
-		
+
 		lblNumeroGrande.setText("XX");
-		
+
 		try {
 			File eliminar_linea = new File("ganadoLinea");
 			eliminar_linea.delete();
 		} catch (Exception e) {
 		}
-		
+
 		try {
 			File eliminar_bingo = new File("ganadoBingo");
 			eliminar_bingo.delete();
 		} catch (Exception e) {
 		}
-		
+
 		cantNumeros = 0;
 		pos = 0;
 	}

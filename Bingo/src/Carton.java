@@ -112,7 +112,7 @@ public class Carton extends JFrame {
 		
 		do {
 			nombre = JOptionPane.showInputDialog("Nombre");
-		} while (nombre.equals(""));
+		} while (nombre==null||nombre.equals(""));
 	}
 
 	private static void generarListener() {
