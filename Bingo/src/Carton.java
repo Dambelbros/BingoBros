@@ -112,6 +112,9 @@ public class Carton extends JFrame {
 		
 		do {
 			nombre = JOptionPane.showInputDialog("Nombre");
+			if(nombre==null) {
+				System.exit(1);
+			}
 		} while (nombre==null||nombre.equals(""));
 	}
 
