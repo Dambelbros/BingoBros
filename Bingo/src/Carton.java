@@ -252,7 +252,7 @@ public class Carton extends JFrame {
 	}
 
 	public static void comprobarLinea() {
-		boolean correcto;
+		boolean correcto, acierto = false;
 		try {
 			Scanner ganado = new Scanner (new File("ganadoLinea"));
 			ganado.close();
@@ -274,8 +274,6 @@ public class Carton extends JFrame {
 						if(carton[j][i].getBackground().equals(Color.WHITE)){
 							correcto = false;
 							j = COL;
-							i = FIL;
-							JOptionPane.showMessageDialog(null, "Linea Incorrecta");
 						}
 					}
 
@@ -297,15 +295,21 @@ public class Carton extends JFrame {
 							ganado.println(nombre);
 							ganado.close();
 							JOptionPane.showMessageDialog(null, "Has cantado linea correctamente");
+							acierto = true;
 							i = FIL;
 						} else {
-							JOptionPane.showMessageDialog(null, "Has cantado linea incorrectamente");
-							i = FIL;
 						}
 					}
-				}} catch (Exception e2) {
+				}
+				
+				if (!acierto) {
+					JOptionPane.showMessageDialog(null, "Has cantado linea incorrectamente");
+				}
+				
+			} catch (Exception e2) {
 
 				}
+			
 
 
 		}
@@ -366,15 +370,22 @@ public class Carton extends JFrame {
 	}
 	
 	public static void cartonNuevo() {
-		for (int i = 0; i < FIL; i++) {
-			for (int j = 0; j < COL; j++) {
-				carton[j][i].setText("");
-				carton[j][i].setBackground(Color.WHITE);
-				carton[j][i].setEnabled(true);
+		try {
+			Scanner ganado = new Scanner (new File("fichero"));
+			ganado.close();
+			JOptionPane.showMessageDialog(null, "No puedes cambiar el carton cuando ha empezado la partida");
+		} catch (Exception e) {
+			for (int i = 0; i < FIL; i++) {
+				for (int j = 0; j < COL; j++) {
+					carton[j][i].setText("");
+					carton[j][i].setBackground(Color.WHITE);
+					carton[j][i].setEnabled(true);
+				}
 			}
+			
+			generarEspaciosVaciosJ();
+			generarNumerosColumnasJ();
 		}
 		
-		generarEspaciosVaciosJ();
-		generarNumerosColumnasJ();
 	}
 }

@@ -222,12 +222,6 @@ public class Ventana extends JFrame {
 	private static void partidaNueva() {
 		automatico.stop();
 
-		try {
-			File eliminar_numeros = new File("fichero");
-			eliminar_numeros.delete();
-		} catch (Exception e) {
-		}
-
 		for (int i = 0; i < labels.length; i++) {
 			labels[i].setBackground(Color.WHITE);
 		}
@@ -241,6 +235,12 @@ public class Ventana extends JFrame {
 		try {
 			File eliminar_linea = new File("ganadoLinea");
 			eliminar_linea.delete();
+		} catch (Exception e) {
+		}
+		
+		try {
+			File eliminar_numeros = new File("fichero");
+			eliminar_numeros.delete();
 		} catch (Exception e) {
 		}
 
