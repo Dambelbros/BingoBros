@@ -12,7 +12,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -251,33 +250,33 @@ public class Carton extends JFrame {
 
 	public static void comprobarLinea() {
 		boolean correcto;
-		for (int i = 0; i < FIL; i++) {
-			correcto = true;
-			for (int j = 0; j < COL; j++) {
-				if(carton[j][i].getBackground().equals(Color.WHITE)){
-					correcto = false;
-					break;
+		try {
+			Scanner ganado = new Scanner (new File("ganadoLinea"));
+			ganado.close();
+			JOptionPane.showMessageDialog(null, "Ya se ha cantado linea");
+		} catch (Exception e) {
+			try {
+				Scanner fichero = new Scanner (new File("fichero"));
+				String numero;
+				int numUno, comprobados = 0;
+				ArrayList<String> correctos = new ArrayList<String>();
+				while (fichero.hasNext()) {
+					numero = (String) fichero.next();
+					correctos.add(numero);
 				}
-			}
 
-			if (correcto) {
-				try {
-					System.out.println("dsg");
-					Scanner ganado = new Scanner (new File("ganadoLinea"));
-					ganado.close();
-					JOptionPane.showMessageDialog(null, "Ya se ha cantado linea");
-					i = 5;
-				} catch (FileNotFoundException e1) {
-					try {
-						Scanner fichero = new Scanner (new File("fichero"));
-						String numero;
-						int numUno, comprobados = 0;
-						ArrayList<String> correctos = new ArrayList<String>();
-						while (fichero.hasNext()) {
-							numero = (String) fichero.next();
-							correctos.add(numero);
+				for (int i = 0; i < FIL; i++) {
+					correcto = true;
+					for (int j = 0; j < COL; j++) {
+						if(carton[j][i].getBackground().equals(Color.WHITE)){
+							correcto = false;
+							j = COL;
+							i = FIL;
+							JOptionPane.showMessageDialog(null, "Linea Incorrecta");
 						}
+					}
 
+					if (correcto) {
 						for (int j = 0; j < COL; j++) {
 							if(carton[j][i].getBackground().equals(Color.GREEN)) {
 								numUno = aNumeroJ(carton[j][i]);
@@ -289,23 +288,28 @@ public class Carton extends JFrame {
 								}
 							}
 						}
-
+						
 						if (comprobados == 5) {
 							PrintWriter ganado = new PrintWriter(new File("ganadoLinea"));
 							ganado.println(nombre);
 							ganado.close();
 							JOptionPane.showMessageDialog(null, "Has cantado linea correctamente");
-							i = 5;
+							i = FIL;
 						} else {
 							JOptionPane.showMessageDialog(null, "Has cantado linea incorrectamente");
+							i = FIL;
 						}
-					} catch (Exception e) {
-
 					}
+				}} catch (Exception e2) {
+
 				}
-			}
+
+
 		}
+
 	}
+
+
 	
 	public static void comprobarBingo() {
 		boolean correcto = true, igual;
