@@ -378,7 +378,6 @@ public class Carton extends JFrame {
 									igual = true;
 								}
 							}
-
 							if(!igual) {
 								correcto = false;
 								break;
@@ -402,6 +401,7 @@ public class Carton extends JFrame {
 		}
 	}
 	
+	
 	public static void cartonNuevo() {
 		try {
 			Scanner partidaIniciada = new Scanner (new File("fichero"));
@@ -419,6 +419,5 @@ public class Carton extends JFrame {
 			generarEspaciosVaciosJ();
 			generarNumerosColumnasJ();
 		}
-		
 	}
 }

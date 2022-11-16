@@ -34,6 +34,9 @@ public class Ventana extends JFrame {
 	private static Timer reloj, automatico;
 	private static boolean cantaLinea = false, cantaBingo = false;
 	private static String ganadorLinea, ganadorBingo;
+	private static JButton btnAuto;
+	private static JButton btnGenerarNumero;
+	private static JButton btnReinicio;
 
 
 	public static void main(String[] args) {
@@ -95,50 +98,15 @@ public class Ventana extends JFrame {
 		layeredPane.add(panelOpciones, BorderLayout.SOUTH);
 
 		/*Boton generar bolas*/
-		JButton btnGenerarNumero = new JButton("Sacar Bola");
-		btnGenerarNumero.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (cantNumeros < 90) {
-					generarNumeroJ();
-					cantNumeros++;
-				}
-			}
-		});
-
-		//Generamos un Timer para automatizar la salida de las bolas.
-		automatico=new Timer(50, new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (cantNumeros < 90) {
-					generarNumeroJ();
-					cantNumeros++;
-				} else {
-					automatico.stop();				}
-			}
-		});
-
-		//Creamos el boton y le indicamos que cuando le demos se inicie y si volvemos a pulsar se pare.
-		JButton btnAuto = new JButton("Modo automático");
-		btnAuto.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(automatico.isRunning()) {
-					automatico.stop();
-				} else {
-					automatico.start();
-				}
-			}
-		});
-		panelOpciones.add(btnAuto);
+		btnGenerarNumero = new JButton("Sacar Bola");
 		panelOpciones.add(btnGenerarNumero);
 
+		//Creamos el boton y le indicamos que cuando le demos se inicie y si volvemos a pulsar se pare.
+		btnAuto = new JButton("Modo automático");
+		panelOpciones.add(btnAuto);
+
 		/*Boton reiniciar*/
-		JButton btnReinicio = new JButton("Reiniciar");
-		btnReinicio.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				partidaNueva();
-			}
-		});
+		btnReinicio = new JButton("Reiniciar");
 		panelOpciones.add(btnReinicio);
 
 		JPanel panelNumeros = new JPanel();
@@ -153,7 +121,36 @@ public class Ventana extends JFrame {
 			panelNumeros.add(btn);
 			labels[i] = btn;
 		}
-
+		
+		generarListener();
+	}
+	
+	private static void generarListener() {
+		btnGenerarNumero.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (cantNumeros < 90) {
+					generarNumeroJ();
+					cantNumeros++;
+				}
+			}
+		});
+		
+		btnAuto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(automatico.isRunning()) {
+					automatico.stop();
+				} else {
+					automatico.start();
+				}
+			}
+		});
+		
+		btnReinicio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				partidaNueva();
+			}
+		});
+		
 		reloj = new Timer(500, new ActionListener() {
 
 			@Override
@@ -185,8 +182,20 @@ public class Ventana extends JFrame {
 				}
 			}
 		});
-
 		reloj.start();
+		
+		automatico=new Timer(50, new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (cantNumeros < 90) {
+					generarNumeroJ();
+					cantNumeros++;
+				} else {
+					automatico.stop();
+				}
+			}
+		});
 	}
 
 	private static void generarNumeroJ() {
