@@ -61,23 +61,23 @@ public class Ventana extends JFrame {
 
 		/*Elimina los archivos creados*/
 		try {
-			File eliminar_linea = new File("ganadoLinea");
-			eliminar_linea.delete();
+			File eliminarLinea = new File("ganadoLinea");
+			eliminarLinea.delete();
 		} catch (Exception e) {
 		}
 
 		try {
-			File eliminar_bingo = new File("ganadoBingo");
-			eliminar_bingo.delete();
+			File eliminarBingo = new File("ganadoBingo");
+			eliminarBingo.delete();
 		} catch (Exception e) {
 		}
-
+		
 		try {
-			File eliminar_numeros = new File("fichero");
-			eliminar_numeros.delete();
+			File eliminarNumeros = new File("fichero");
+			eliminarNumeros.delete();
 		} catch (Exception e) {
 		}
-
+		
 		/*Panel principal*/
 		JLayeredPane layeredPane = new JLayeredPane();
 		contentPane.add(layeredPane, BorderLayout.CENTER);
@@ -87,7 +87,7 @@ public class Ventana extends JFrame {
 		layeredPane.add(panelNumeroGrande, BorderLayout.EAST);
 		panelNumeroGrande.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-		lblNumeroGrande = new JLabel("XX");
+		lblNumeroGrande = new JLabel("00");
 		lblNumeroGrande.setFont(new Font("Tahoma", Font.PLAIN, 99));
 		panelNumeroGrande.add(lblNumeroGrande);
 
@@ -211,11 +211,8 @@ public class Ventana extends JFrame {
 					}
 					fichero.close();
 				} catch (FileNotFoundException e) {
-
 				}
-
 			}
-
 		} while (igual);
 	}
 
@@ -230,23 +227,23 @@ public class Ventana extends JFrame {
 			numeros[i] = 0;
 		}
 
-		lblNumeroGrande.setText("XX");
+		lblNumeroGrande.setText("00");
 
 		try {
-			File eliminar_linea = new File("ganadoLinea");
-			eliminar_linea.delete();
-		} catch (Exception e) {
-		}
-		
-		try {
-			File eliminar_numeros = new File("fichero");
-			eliminar_numeros.delete();
+			File eliminarLinea = new File("ganadoLinea");
+			eliminarLinea.delete();
 		} catch (Exception e) {
 		}
 
 		try {
-			File eliminar_bingo = new File("ganadoBingo");
-			eliminar_bingo.delete();
+			File eliminarBingo = new File("ganadoBingo");
+			eliminarBingo.delete();
+		} catch (Exception e) {
+		}
+
+		try {
+			File eliminarNumeros = new File("fichero");
+			eliminarNumeros.delete();
 		} catch (Exception e) {
 		}
 

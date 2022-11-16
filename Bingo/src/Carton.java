@@ -2,6 +2,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
 import javax.swing.JButton;
@@ -28,9 +29,10 @@ public class Carton extends JFrame {
 	private static JPanel contentPane, panelCasillas, panelBotones, panelArriba;
 	private JLayeredPane layeredPane;
 	private static JButton[][] carton = new JButton[COL][FIL];
-	private static JButton btnLinea, btnBingo;
-	public static String nombre;
-	private JButton btnNuevocarton;
+	private static JButton btnLinea, btnBingo, btnNuevocarton;
+	private static String nombre, ganadorLinea, ganadorBingo;
+	private static boolean cantadoLinea = false, cantadoBingo = false, persLinea = false, persBingo = false;
+	private static Timer reloj;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -88,11 +90,6 @@ public class Carton extends JFrame {
 		panelBotones.add(btnBingo);
 		
 		btnNuevocarton = new JButton("NUEVO CARTÓN");
-		btnNuevocarton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				cartonNuevo();
-			}
-		});
 		btnNuevocarton.setBounds(398, 0, 143, 40);
 		panelBotones.add(btnNuevocarton);
 
@@ -105,6 +102,40 @@ public class Carton extends JFrame {
 		lblNewLabel.setFont(new Font("Snap ITC", Font.PLAIN, 35));
 		lblNewLabel.setBounds(145, 0, 279, 43);
 		panelArriba.add(lblNewLabel);
+		
+		reloj = new Timer(500, new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (!cantadoLinea && !persLinea) {
+					try {
+						Scanner archivoLinea = new Scanner (new File("ganadoLinea"));
+						while (archivoLinea.hasNext()) {
+							ganadorLinea = (String) archivoLinea.next();
+						}
+						archivoLinea.close();
+						cantadoLinea = true;
+						JOptionPane.showMessageDialog(null, (ganadorLinea + " a cantado linea correctamente"));
+					} catch (Exception e2) {
+					}
+				}
+
+				if (!cantadoBingo && !persBingo) {
+					try {
+						Scanner archivoLinea = new Scanner (new File("ganadoBingo"));
+						while (archivoLinea.hasNext()) {
+							ganadorBingo = (String) archivoLinea.next();
+						}
+						archivoLinea.close();
+						cantadoBingo = true;
+						JOptionPane.showMessageDialog(null, (ganadorBingo + " a cantado bingo correctamente"));
+					} catch (Exception e2) {
+					}
+				}
+			}
+		});
+
+		reloj.start();
 
 		generarEspaciosVaciosJ();
 		generarNumerosColumnasJ();
@@ -134,6 +165,12 @@ public class Carton extends JFrame {
 		btnBingo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				comprobarBingo();
+			}
+		});
+		
+		btnNuevocarton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cartonNuevo();
 			}
 		});
 	}
@@ -267,7 +304,8 @@ public class Carton extends JFrame {
 					numero = (String) fichero.next();
 					correctos.add(numero);
 				}
-
+				fichero.close();
+				
 				for (int i = 0; i < FIL; i++) {
 					correcto = true;
 					for (int j = 0; j < COL; j++) {
@@ -294,6 +332,7 @@ public class Carton extends JFrame {
 							PrintWriter ganado = new PrintWriter(new File("ganadoLinea"));
 							ganado.println(nombre);
 							ganado.close();
+							persLinea = true;
 							JOptionPane.showMessageDialog(null, "Has cantado linea correctamente");
 							acierto = true;
 							i = FIL;
@@ -301,21 +340,13 @@ public class Carton extends JFrame {
 						}
 					}
 				}
-				
 				if (!acierto) {
-					JOptionPane.showMessageDialog(null, "Has cantado linea incorrectamente");
+					JOptionPane.showMessageDialog(null, "Linea Fallida");
 				}
-				
 			} catch (Exception e2) {
-
-				}
-			
-
-
+			}
 		}
-
 	}
-
 
 	
 	public static void comprobarBingo() {
@@ -333,6 +364,7 @@ public class Carton extends JFrame {
 					numero = (String) fichero.next();
 					bingo.add(numero);
 				}
+				fichero.close();
 
 				for (int i = 0; i < FIL; i++) {
 					for (int j = 0; j < COL; j++) {
@@ -358,9 +390,10 @@ public class Carton extends JFrame {
 					PrintWriter ganado = new PrintWriter(new File("ganadoBingo"));
 					ganado.println(nombre);
 					ganado.close();
+					persBingo = true;
 					JOptionPane.showMessageDialog(null, "Has cantado bingo, has ganado");
 				} else {
-					JOptionPane.showMessageDialog(null, "Has cantado bingo incorrectamente");
+					JOptionPane.showMessageDialog(null, "Bingo Fallido");
 				}
 
 			} catch (Exception e1) {
@@ -371,8 +404,8 @@ public class Carton extends JFrame {
 	
 	public static void cartonNuevo() {
 		try {
-			Scanner ganado = new Scanner (new File("fichero"));
-			ganado.close();
+			Scanner partidaIniciada = new Scanner (new File("fichero"));
+			partidaIniciada.close();
 			JOptionPane.showMessageDialog(null, "No puedes cambiar el carton cuando ha empezado la partida");
 		} catch (Exception e) {
 			for (int i = 0; i < FIL; i++) {
