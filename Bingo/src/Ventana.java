@@ -37,7 +37,7 @@ public class Ventana extends JFrame {
 	private static boolean cantaLinea = false, cantaBingo = false;
 	private static String ganadorLinea, ganadorBingo;
 	private static JButton btnAuto, btnGenerarNumero, btnReinicio;
-	private static Color verde = new Color(100, 194, 123);
+	private static Color verde = new Color(155, 250, 176);
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {

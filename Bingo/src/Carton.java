@@ -33,7 +33,7 @@ public class Carton extends JFrame {
 	private static String nombre, ganadorLinea, ganadorBingo;
 	private static boolean cantadoLinea = false, cantadoBingo = false, persLinea = false, persBingo = false;
 	private static Timer reloj;
-	private static Color fondo= new Color(245,245,245), verde = new Color(100, 194, 123), negro = new Color(44, 44,44);
+	private static Color fondo= new Color(245,245,245), verde = new Color(155, 250, 176), negro = new Color(44, 44,44);
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
