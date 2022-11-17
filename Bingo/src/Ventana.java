@@ -194,7 +194,7 @@ public class Ventana extends JFrame {
 		});
 		reloj.start();
 		
-		automatico=new Timer(50, new ActionListener() {
+		automatico=new Timer(5000, new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
