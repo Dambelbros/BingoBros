@@ -242,6 +242,8 @@ public class Ventana extends JFrame {
 	/*Partida nueva*/
 	private static void partidaNueva() {
 		automatico.stop();
+		cantaLinea = false;
+		cantaBingo = false;
 
 		for (int i = 0; i < labels.length; i++) {
 			labels[i].setBackground(Color.WHITE);

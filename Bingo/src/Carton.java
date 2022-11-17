@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
+
 import javax.swing.JButton;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
@@ -49,7 +50,7 @@ public class Carton extends JFrame {
 	}
 
 	public Carton() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("bolaCarton.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("imagenes/bolaCarton.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 567, 314);
 		setResizable(false);
@@ -445,6 +446,11 @@ public class Carton extends JFrame {
 					carton[j][i].setEnabled(true);
 				}
 			}
+			
+			cantadoLinea = false;
+			cantadoBingo = false;
+			persLinea = false;
+			persBingo = false;
 			
 			generarEspaciosVaciosJ();
 			generarNumerosColumnasJ();
