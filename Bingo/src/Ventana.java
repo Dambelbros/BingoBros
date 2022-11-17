@@ -81,7 +81,7 @@ public class Ventana extends JFrame {
 		} catch (Exception e) {
 		}
 		
-		/*Panel principal*/
+		/*Panel principal (lo que hay dentro de la ventana)*/
 		JLayeredPane layeredPane = new JLayeredPane();
 		contentPane.add(layeredPane, BorderLayout.CENTER);
 		layeredPane.setLayout(new BorderLayout(0, 0));
@@ -104,7 +104,7 @@ public class Ventana extends JFrame {
 		btnGenerarNumero.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		panelOpciones.add(btnGenerarNumero);
 
-		//Creamos el boton y le indicamos que cuando le demos se inicie y si volvemos a pulsar se pare.
+		/*Creamos el boton y le indicamos que cuando le demos se inicie y si volvemos a pulsar se pare*/
 		btnAuto = new JButton("Modo automático");
 		btnAuto.setBackground(new Color(255, 255, 255));
 		btnAuto.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -135,6 +135,7 @@ public class Ventana extends JFrame {
 		generarListener();
 	}
 	
+	/*Generar Listeners*/
 	private static void generarListener() {
 		btnGenerarNumero.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -163,6 +164,7 @@ public class Ventana extends JFrame {
 		
 		reloj = new Timer(500, new ActionListener() {
 
+			/*Creación de fichero y aparición de mensaje*/
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (!cantaLinea) {
@@ -194,6 +196,7 @@ public class Ventana extends JFrame {
 		});
 		reloj.start();
 		
+		/*Botón sacar números de forma automática*/
 		automatico=new Timer(5000, new ActionListener() {
 
 			@Override
@@ -208,6 +211,7 @@ public class Ventana extends JFrame {
 		});
 	}
 
+	/*Generador de números*/
 	private static void generarNumeroJ() {
 		boolean igual = false;
 		do {
@@ -235,6 +239,7 @@ public class Ventana extends JFrame {
 		} while (igual);
 	}
 
+	/*Partida nueva*/
 	private static void partidaNueva() {
 		automatico.stop();
 

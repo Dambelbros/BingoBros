@@ -84,6 +84,7 @@ public class Carton extends JFrame {
 			}
 		}
 
+		/*Paneles y botones*/
 		panelBotones = new JPanel();
 		panelBotones.setBackground(fondo);
 		panelBotones.setOpaque(true);
@@ -116,6 +117,7 @@ public class Carton extends JFrame {
 		layeredPane.add(panelArriba);
 		panelArriba.setLayout(null);
 
+		/*Título*/
 		JLabel lblNewLabel = new JLabel("BINGOBROS");
 		lblNewLabel.setForeground(new Color(44, 44, 44));
 		lblNewLabel.setFont(new Font("Verdana", Font.BOLD | Font.ITALIC, 35));
@@ -124,6 +126,7 @@ public class Carton extends JFrame {
 		
 		reloj = new Timer(500, new ActionListener() {
 
+			/*Creación de fichero y aparición de mensaje*/
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (!cantadoLinea && !persLinea) {
@@ -160,6 +163,7 @@ public class Carton extends JFrame {
 		generarNumerosColumnasJ();
 		generarListener();
 		
+		/*Ventana de entrada para introducir el nombre*/
 		do {
 			nombre = JOptionPane.showInputDialog("Nombre");
 			if(nombre==null) {
@@ -168,6 +172,7 @@ public class Carton extends JFrame {
 		} while (nombre==null||nombre.equals(""));
 	}
 
+	/*Generar Listeners*/
 	private static void generarListener() {
 		for (int i = 0; i < COL; i++) {
 			for (int j = 0; j < FIL; j++) {
@@ -194,6 +199,7 @@ public class Carton extends JFrame {
 		});
 	}
 
+	/*Generador de espacios vacios*/
 	private static void generarEspaciosVaciosJ() {
 		int[] vacio = new int[4];
 		for (int fila = 0; fila < FIL; fila++) {
@@ -226,6 +232,7 @@ public class Carton extends JFrame {
 		}
 	}
 
+	/*Generador de numeros*/
 	private static void generarNumerosColumnasJ() {
 		int min, sum, menor, medio = 0, mayor, menorPos = 0, mayorPos = 0;
 		int[] arrayNum = new int[3];
@@ -279,6 +286,7 @@ public class Carton extends JFrame {
 		}
 	}
 
+	/*Consigue texto en los botones y los pasa a números controlando los posibles fallos*/
 	private static int aNumeroJ(JButton boton) {
 		if(esNumero(boton.getText())) {
 			return Integer.parseInt(boton.getText());
@@ -286,6 +294,7 @@ public class Carton extends JFrame {
 		return 0;
 	}
 
+	/*Comprobación de números en botones*/
 	private static boolean esNumero(String str) { 
 		try {  
 			Double.parseDouble(str);  
@@ -295,6 +304,7 @@ public class Carton extends JFrame {
 		}  
 	}
 	
+	/*Clickar un número y que cambie de color*/
 	private static void cambioColor(JButton boton) {
 		boton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -307,6 +317,7 @@ public class Carton extends JFrame {
 		});
 	}
 
+	/*Comprobador de línea*/
 	public static void comprobarLinea() {
 		boolean correcto, acierto = false;
 		try {
@@ -367,7 +378,7 @@ public class Carton extends JFrame {
 		}
 	}
 
-	
+	/*comprobador de bingo*/
 	public static void comprobarBingo() {
 		boolean correcto = true, igual;
 		try {
@@ -420,7 +431,7 @@ public class Carton extends JFrame {
 		}
 	}
 	
-	
+	/*Generar cartón nuevo*/
 	public static void cartonNuevo() {
 		try {
 			Scanner partidaIniciada = new Scanner (new File("fichero"));
