@@ -16,27 +16,28 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.FlowLayout;
+import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
 public class Ventana extends JFrame {
 
 	private JPanel contentPane;
 
-	private static JButton[] labels = new JButton[90];
+	private static JLabel[] labels = new JLabel[90];
 	private static int cantNumeros = 0, pos = 0;
 	private static int[] numeros = new int[90];
 	private static JLabel lblNumeroGrande;
 	private static Timer reloj, automatico;
 	private static boolean cantaLinea = false, cantaBingo = false;
 	private static String ganadorLinea, ganadorBingo;
-	private static JButton btnAuto;
-	private static JButton btnGenerarNumero;
-	private static JButton btnReinicio;
+	private static JButton btnAuto, btnGenerarNumero, btnReinicio;
+	private JLabel lblNewLabel;
 
 
 	public static void main(String[] args) {
@@ -91,6 +92,7 @@ public class Ventana extends JFrame {
 		panelNumeroGrande.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		lblNumeroGrande = new JLabel("00");
+		lblNumeroGrande.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNumeroGrande.setFont(new Font("Tahoma", Font.PLAIN, 99));
 		panelNumeroGrande.add(lblNumeroGrande);
 
@@ -115,11 +117,14 @@ public class Ventana extends JFrame {
 
 		/*Generador de botones numero*/
 		for (int i = 0; i < 90; i++) {
-			JButton btn = new JButton(String.valueOf((i + 1)));
-			btn.setEnabled(false);
-			btn.setBackground(Color.WHITE);
-			panelNumeros.add(btn);
-			labels[i] = btn;
+			JLabel lbl = new JLabel(String.valueOf((i + 1)), SwingConstants.CENTER);
+			lbl.setBackground(Color.WHITE);
+			lbl.setOpaque(true);
+			lbl.setFont(new Font("Tw Cen MT", Font.PLAIN, 22));
+			lbl.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+			panelNumeros.add(lbl);
+			
+			labels[i] = lbl;
 		}
 		
 		generarListener();
