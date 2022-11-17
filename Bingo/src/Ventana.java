@@ -37,8 +37,7 @@ public class Ventana extends JFrame {
 	private static boolean cantaLinea = false, cantaBingo = false;
 	private static String ganadorLinea, ganadorBingo;
 	private static JButton btnAuto, btnGenerarNumero, btnReinicio;
-	private JLabel lblNewLabel;
-
+	private static Color verde = new Color(100, 194, 123);
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -101,14 +100,20 @@ public class Ventana extends JFrame {
 
 		/*Boton generar bolas*/
 		btnGenerarNumero = new JButton("Sacar Bola");
+		btnGenerarNumero.setBackground(new Color(255, 255, 255));
+		btnGenerarNumero.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		panelOpciones.add(btnGenerarNumero);
 
 		//Creamos el boton y le indicamos que cuando le demos se inicie y si volvemos a pulsar se pare.
 		btnAuto = new JButton("Modo automático");
+		btnAuto.setBackground(new Color(255, 255, 255));
+		btnAuto.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		panelOpciones.add(btnAuto);
 
 		/*Boton reiniciar*/
 		btnReinicio = new JButton("Reiniciar");
+		btnReinicio.setBackground(new Color(255, 255, 255));
+		btnReinicio.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		panelOpciones.add(btnReinicio);
 
 		JPanel panelNumeros = new JPanel();
@@ -208,8 +213,8 @@ public class Ventana extends JFrame {
 		do {
 			igual = true;
 			int num = (int)(Math.random()*90+1);
-			if(labels[num - 1].getBackground() != Color.GREEN) {
-				labels[num - 1].setBackground(Color.GREEN);
+			if(labels[num - 1].getBackground() != verde) {
+				labels[num - 1].setBackground(verde);
 				igual = false;
 				numeros[pos] = num;
 				pos++;

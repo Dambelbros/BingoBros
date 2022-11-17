@@ -33,6 +33,7 @@ public class Carton extends JFrame {
 	private static String nombre, ganadorLinea, ganadorBingo;
 	private static boolean cantadoLinea = false, cantadoBingo = false, persLinea = false, persBingo = false;
 	private static Timer reloj;
+	private static Color fondo= new Color(245,245,245), verde = new Color(100, 194, 123), negro = new Color(44, 44,44);
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -53,15 +54,21 @@ public class Carton extends JFrame {
 		setBounds(100, 100, 567, 314);
 		setResizable(false);
 		contentPane = new JPanel();
+		contentPane.setBackground(fondo);
+		contentPane.setForeground(fondo);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 
 		layeredPane = new JLayeredPane();
+		layeredPane.setForeground(fondo);
+		layeredPane.setBackground(fondo);
+		layeredPane.setOpaque(true);
 		contentPane.add(layeredPane, BorderLayout.CENTER);
 
 		panelCasillas = new JPanel();
+		panelCasillas.setBackground(fondo);
 		panelCasillas.setBounds(0, 43, 541, 160);
 		layeredPane.add(panelCasillas);
 		panelCasillas.setLayout(new GridLayout(3, 9, 0, 0));
@@ -71,36 +78,48 @@ public class Carton extends JFrame {
 			for (int j = 0; j < COL; j++) {
 				JButton btnCasilla = new JButton("");
 				btnCasilla.setBackground(Color.WHITE);
+				btnCasilla.setFont(new Font("Tw Cen MT", Font.PLAIN, 20));
 				panelCasillas.add(btnCasilla);
 				carton[j][i] = btnCasilla;
 			}
 		}
 
 		panelBotones = new JPanel();
+		panelBotones.setBackground(fondo);
+		panelBotones.setOpaque(true);
 		panelBotones.setBounds(0, 214, 541, 51);
 		layeredPane.add(panelBotones);
 		panelBotones.setLayout(null);
 
 		btnLinea = new JButton("LINEA");
+		btnLinea.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnLinea.setBackground(new Color(255, 255, 255));
 		btnLinea.setBounds(0, 0, 143, 40);
 		panelBotones.add(btnLinea);
 
 		btnBingo = new JButton("BINGO");
+		btnBingo.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnBingo.setBackground(new Color(255, 255, 255));
 		btnBingo.setBounds(199, 0, 143, 40);
 		panelBotones.add(btnBingo);
 		
 		btnNuevocarton = new JButton("NUEVO CARTÓN");
+		btnNuevocarton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnNuevocarton.setBackground(new Color(255, 255, 255));
 		btnNuevocarton.setBounds(398, 0, 143, 40);
 		panelBotones.add(btnNuevocarton);
 
 		panelArriba = new JPanel();
-		panelArriba.setBounds(0, 0, 531, 43);
+		panelArriba.setBackground(fondo);
+		panelArriba.setBounds(0, 0, 541, 43);
+		panelArriba.setOpaque(true);
 		layeredPane.add(panelArriba);
 		panelArriba.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("BINGOBROS");
-		lblNewLabel.setFont(new Font("Snap ITC", Font.PLAIN, 35));
-		lblNewLabel.setBounds(145, 0, 279, 43);
+		lblNewLabel.setForeground(new Color(44, 44, 44));
+		lblNewLabel.setFont(new Font("Verdana", Font.BOLD | Font.ITALIC, 35));
+		lblNewLabel.setBounds(145, 0, 243, 43);
 		panelArriba.add(lblNewLabel);
 		
 		reloj = new Timer(500, new ActionListener() {
@@ -187,7 +206,7 @@ public class Carton extends JFrame {
 				/*Comprueba que la casilla no este en la lista de casillas vacias y si es 
 				 * la ultima fila comprueba que las dos de arriba no esten en negro*/
 				for (int i = 0; i < vacio.length; i++) {
-					if (num == vacio[i] || (fila == 2 && (carton[num][0].getBackground().equals(Color.BLACK) && carton[num][1].getBackground().equals(Color.BLACK)))) {
+					if (num == vacio[i] || (fila == 2 && (carton[num][0].getBackground().equals(negro) && carton[num][1].getBackground().equals(negro)))) {
 						igual = true;
 						i = 4;
 					}
@@ -201,7 +220,7 @@ public class Carton extends JFrame {
 			}
 
 			for (int i = 0; i < vacio.length; i++) {
-				carton[vacio[i]][fila].setBackground(Color.BLACK);
+				carton[vacio[i]][fila].setBackground(negro);
 				carton[vacio[i]][fila].setEnabled(false);
 			}
 		}
@@ -280,7 +299,7 @@ public class Carton extends JFrame {
 		boton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (boton.getBackground().equals(Color.WHITE)) {
-					boton.setBackground(Color.GREEN);
+					boton.setBackground(verde);
 				} else {
 					boton.setBackground(Color.WHITE);
 				}
@@ -317,7 +336,7 @@ public class Carton extends JFrame {
 
 					if (correcto) {
 						for (int j = 0; j < COL; j++) {
-							if(carton[j][i].getBackground().equals(Color.GREEN)) {
+							if(carton[j][i].getBackground().equals(verde)) {
 								numUno = aNumeroJ(carton[j][i]);
 								for (int c = 0; c < correctos.size(); c++) {
 									if(Integer.parseInt(correctos.get(c)) == numUno) {
@@ -372,7 +391,7 @@ public class Carton extends JFrame {
 						if(carton[j][i].getBackground().equals(Color.WHITE)) {
 							correcto = false;
 							break;
-						} else if(carton[j][i].getBackground().equals(Color.GREEN)) {
+						} else if(carton[j][i].getBackground().equals(verde)) {
 							for (int numBingo = 0; numBingo < bingo.size(); numBingo++) {
 								if (Integer.parseInt(bingo.get(numBingo)) == aNumeroJ(carton[j][i])) {
 									igual = true;
