@@ -138,7 +138,7 @@ public class Carton extends JFrame {
 						}
 						archivoLinea.close();
 						cantadoLinea = true;
-						JOptionPane.showMessageDialog(null, (ganadorLinea + " a cantado linea correctamente"));
+						JOptionPane.showMessageDialog(null, (ganadorLinea + " ha cantado linea correctamente"));
 					} catch (Exception e2) {
 					}
 				}
@@ -152,7 +152,7 @@ public class Carton extends JFrame {
 						archivoLinea.close();
 						cantadoBingo = true;
 						deshabilitarTodo();
-						JOptionPane.showMessageDialog(null, (ganadorBingo + " a cantado bingo correctamente"));
+						JOptionPane.showMessageDialog(null, (ganadorBingo + " ha cantado bingo correctamente"));
 					} catch (Exception e2) {
 					}
 				}
