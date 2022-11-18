@@ -140,6 +140,8 @@ public class Ventana extends JFrame {
 		btnGenerarNumero.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (cantNumeros < 90) {
+					automatico.stop();
+					btnAuto.setBackground(Color.WHITE);
 					generarNumeroJ();
 					cantNumeros++;
 				}
@@ -148,11 +150,7 @@ public class Ventana extends JFrame {
 		
 		btnAuto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(automatico.isRunning()) {
-					automatico.stop();
-				} else {
-					automatico.start();
-				}
+				cambioAutomatico();
 			}
 		});
 		
@@ -162,7 +160,7 @@ public class Ventana extends JFrame {
 			}
 		});
 		
-		reloj = new Timer(500, new ActionListener() {
+		reloj = new Timer(100, new ActionListener() {
 
 			/*Creación de fichero y aparición de mensaje*/
 			@Override
@@ -197,7 +195,7 @@ public class Ventana extends JFrame {
 		reloj.start();
 		
 		/*Botón sacar números de forma automática*/
-		automatico=new Timer(5000, new ActionListener() {
+		automatico=new Timer(3000, new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -211,6 +209,16 @@ public class Ventana extends JFrame {
 		});
 	}
 
+	private static void cambioAutomatico() {
+		if(automatico.isRunning()) {
+			automatico.stop();
+			btnAuto.setBackground(Color.WHITE);
+		} else {
+			automatico.start();
+			btnAuto.setBackground(verde);
+		}
+	}
+	
 	/*Generador de números*/
 	private static void generarNumeroJ() {
 		boolean igual = false;
@@ -242,6 +250,7 @@ public class Ventana extends JFrame {
 	/*Partida nueva*/
 	private static void partidaNueva() {
 		automatico.stop();
+		btnAuto.setBackground(Color.WHITE);
 		cantaLinea = false;
 		cantaBingo = false;
 

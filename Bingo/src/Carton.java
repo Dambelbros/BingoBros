@@ -125,7 +125,7 @@ public class Carton extends JFrame {
 		lblNewLabel.setBounds(145, 0, 243, 43);
 		panelArriba.add(lblNewLabel);
 		
-		reloj = new Timer(500, new ActionListener() {
+		reloj = new Timer(100, new ActionListener() {
 
 			/*Creación de fichero y aparición de mensaje*/
 			@Override
@@ -469,6 +469,7 @@ public class Carton extends JFrame {
 			
 			btnLinea.setEnabled(true);
 			btnBingo.setEnabled(true);
+			
 			
 			generarEspaciosVaciosJ();
 			generarNumerosColumnasJ();
