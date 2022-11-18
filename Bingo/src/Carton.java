@@ -6,6 +6,7 @@ import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
@@ -21,7 +22,6 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JLabel;
 import java.awt.Font;
-import java.awt.Toolkit;
 
 @SuppressWarnings("serial")
 public class Carton extends JFrame {
@@ -50,7 +50,7 @@ public class Carton extends JFrame {
 	}
 
 	public Carton() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("imagenes/bolaCarton.png"));
+		setIconImage(new ImageIcon(getClass().getResource("bolaCarton.png")).getImage());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 567, 314);
 		setResizable(false);
@@ -151,6 +151,7 @@ public class Carton extends JFrame {
 						}
 						archivoLinea.close();
 						cantadoBingo = true;
+						deshabilitarTodo();
 						JOptionPane.showMessageDialog(null, (ganadorBingo + " a cantado bingo correctamente"));
 					} catch (Exception e2) {
 					}
@@ -173,6 +174,18 @@ public class Carton extends JFrame {
 		} while (nombre==null||nombre.equals(""));
 	}
 
+	/*Deshabilitar todo*/
+	private static void deshabilitarTodo() {
+		for (int i = 0; i < FIL; i++) {
+			for (int j = 0; j < COL; j++) {
+				carton[j][i].setEnabled(false);
+			}
+		}
+		
+		btnBingo.setEnabled(false);
+		btnLinea.setEnabled(false);
+	}
+	
 	/*Generar Listeners*/
 	private static void generarListener() {
 		for (int i = 0; i < COL; i++) {
@@ -375,6 +388,7 @@ public class Carton extends JFrame {
 					JOptionPane.showMessageDialog(null, "Linea Fallida");
 				}
 			} catch (Exception e2) {
+				JOptionPane.showMessageDialog(null, "Aun no ha empezado la partida");
 			}
 		}
 	}
@@ -421,13 +435,14 @@ public class Carton extends JFrame {
 					ganado.println(nombre);
 					ganado.close();
 					persBingo = true;
+					deshabilitarTodo();
 					JOptionPane.showMessageDialog(null, "Has cantado bingo, has ganado");
 				} else {
 					JOptionPane.showMessageDialog(null, "Bingo Fallido");
 				}
 
 			} catch (Exception e1) {
-
+				JOptionPane.showMessageDialog(null, "Aun no ha empezado la partida");
 			}
 		}
 	}
@@ -451,6 +466,9 @@ public class Carton extends JFrame {
 			cantadoBingo = false;
 			persLinea = false;
 			persBingo = false;
+			
+			btnLinea.setEnabled(true);
+			btnBingo.setEnabled(true);
 			
 			generarEspaciosVaciosJ();
 			generarNumerosColumnasJ();

@@ -17,10 +17,10 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
-import java.awt.Toolkit;
 import java.awt.FlowLayout;
 import javax.swing.SwingConstants;
 
@@ -53,7 +53,7 @@ public class Ventana extends JFrame {
 	}
 
 	public Ventana() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("bingoVentana.png"));
+		setIconImage(new ImageIcon(getClass().getResource("bingoVentana.png")).getImage());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 639, 489);
 		contentPane = new JPanel();
