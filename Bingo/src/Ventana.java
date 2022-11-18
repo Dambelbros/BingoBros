@@ -173,7 +173,7 @@ public class Ventana extends JFrame {
 						}
 						archivoLinea.close();
 						cantaLinea = true;
-						JOptionPane.showMessageDialog(null, (ganadorLinea + " a cantado linea correctamente"));
+						JOptionPane.showMessageDialog(null, (ganadorLinea + " ha cantado linea correctamente"));
 					} catch (Exception e2) {
 					}
 				}
@@ -186,7 +186,7 @@ public class Ventana extends JFrame {
 						}
 						archivoLinea.close();
 						cantaBingo = true;
-						JOptionPane.showMessageDialog(null, (ganadorBingo + " a cantado bingo correctamente"));
+						JOptionPane.showMessageDialog(null, (ganadorBingo + " ha cantado bingo correctamente"));
 					} catch (Exception e2) {
 					}
 				}
