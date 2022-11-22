@@ -50,6 +50,7 @@ public class Carton extends JFrame {
 	}
 
 	public Carton() {
+		setTitle("Carton");
 		setIconImage(new ImageIcon(getClass().getResource("bolaCarton.png")).getImage());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 567, 314);
@@ -160,7 +161,7 @@ public class Carton extends JFrame {
 		});
 
 		reloj.start();
-
+		
 		generarEspaciosVaciosJ();
 		generarNumerosColumnasJ();
 		generarListener();
@@ -172,6 +173,8 @@ public class Carton extends JFrame {
 				System.exit(1);
 			}
 		} while (nombre==null||nombre.equals(""));
+		
+		setTitle("Carton: " + nombre);
 	}
 
 	/*Deshabilitar todo*/
@@ -238,7 +241,7 @@ public class Carton extends JFrame {
 					aux++;
 				}
 			}
-
+			
 			for (int i = 0; i < vacio.length; i++) {
 				carton[vacio[i]][fila].setBackground(negro);
 				carton[vacio[i]][fila].setEnabled(false);

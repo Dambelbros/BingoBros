@@ -53,6 +53,7 @@ public class Ventana extends JFrame {
 	}
 
 	public Ventana() {
+		setTitle("Bingo");
 		setIconImage(new ImageIcon(getClass().getResource("bingoVentana.png")).getImage());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 639, 489);
@@ -173,6 +174,8 @@ public class Ventana extends JFrame {
 						}
 						archivoLinea.close();
 						cantaLinea = true;
+						automatico.stop();
+						btnAuto.setBackground(Color.WHITE);
 						JOptionPane.showMessageDialog(null, (ganadorLinea + " ha cantado linea correctamente"));
 					} catch (Exception e2) {
 					}
@@ -186,6 +189,8 @@ public class Ventana extends JFrame {
 						}
 						archivoLinea.close();
 						cantaBingo = true;
+						automatico.stop();
+						btnAuto.setBackground(Color.WHITE);
 						JOptionPane.showMessageDialog(null, (ganadorBingo + " ha cantado bingo correctamente"));
 					} catch (Exception e2) {
 					}
@@ -204,18 +209,21 @@ public class Ventana extends JFrame {
 					cantNumeros++;
 				} else {
 					automatico.stop();
+					btnAuto.setBackground(Color.WHITE);
 				}
 			}
 		});
 	}
 
 	private static void cambioAutomatico() {
-		if(automatico.isRunning()) {
-			automatico.stop();
-			btnAuto.setBackground(Color.WHITE);
-		} else {
-			automatico.start();
-			btnAuto.setBackground(verde);
+		if (cantNumeros < 90) {
+			if(automatico.isRunning()) {
+				automatico.stop();
+				btnAuto.setBackground(Color.WHITE);
+			} else {
+				automatico.start();
+				btnAuto.setBackground(verde);
+			}
 		}
 	}
 	
